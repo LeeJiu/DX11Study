@@ -23,12 +23,6 @@ struct PixelIn
 	float2 Tex	: TEXCOORD0;
 };
 
-//struct VertexOut
-//{
-//	float4 Pos  : SV_POSITION;
-//	float4 Color : COLOR;
-//};
-
 // Textrue Vertex Shader
 PixelIn TextureVS(VertexIn vin)
 {
@@ -56,8 +50,8 @@ technique11 TextureTech
 {
 	pass P0
 	{
-		SetVertexShader(CompileShader(vs_5_0, VS()));
+		SetVertexShader(CompileShader(vs_5_0, TextureVS()));
 		SetGeometryShader(NULL);
-		SetPixelShader(CompileShader(ps_5_0, PS()));
+		SetPixelShader(CompileShader(ps_5_0, TexturePS()));
 	}
 }

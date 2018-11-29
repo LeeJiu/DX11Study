@@ -47,14 +47,36 @@ bool Dx11Geometry::InitBuffers(ID3D11Device * device)
 	// Create vertex buffer
 	VertexTex vertices[] =
 	{
+		// front	/ 0 1 2 3
 		{ XMFLOAT3(-0.5f, -0.5f, -0.5f), XMFLOAT2(0.0f, 1.0f)},
 		{ XMFLOAT3(-0.5f, +0.5f, -0.5f), XMFLOAT2(0.0f, 0.0f)},
 		{ XMFLOAT3(+0.5f, +0.5f, -0.5f), XMFLOAT2(1.0f, 0.0f)},
 		{ XMFLOAT3(+0.5f, -0.5f, -0.5f), XMFLOAT2(1.0f, 1.0f)},
-		{ XMFLOAT3(-0.5f, -0.5f, +0.5f), XMFLOAT2(0.0f, 1.0f)},
-		{ XMFLOAT3(-0.5f, +0.5f, +0.5f), XMFLOAT2(0.0f, 0.0f)},
-		{ XMFLOAT3(+0.5f, +0.5f, +0.5f), XMFLOAT2(1.0f, 0.0f)},
-		{ XMFLOAT3(+0.5f, -0.5f, +0.5f), XMFLOAT2(1.0f, 1.0f)}
+		// back		/ 4 5 6 7
+		{ XMFLOAT3(-0.5f, -0.5f, +0.5f), XMFLOAT2(1.0f, 1.0f)},
+		{ XMFLOAT3(-0.5f, +0.5f, +0.5f), XMFLOAT2(1.0f, 0.0f)},
+		{ XMFLOAT3(+0.5f, +0.5f, +0.5f), XMFLOAT2(0.0f, 0.0f)},
+		{ XMFLOAT3(+0.5f, -0.5f, +0.5f), XMFLOAT2(0.0f, 1.0f)},
+		// left		/ 8 9 10 11
+		{ XMFLOAT3(-0.5f, -0.5f, -0.5f), XMFLOAT2(1.0f, 1.0f) },
+		{ XMFLOAT3(-0.5f, +0.5f, -0.5f), XMFLOAT2(1.0f, 0.0f) },
+		{ XMFLOAT3(-0.5f, +0.5f, +0.5f), XMFLOAT2(0.0f, 0.0f) },
+		{ XMFLOAT3(-0.5f, -0.5f, +0.5f), XMFLOAT2(0.0f, 1.0f) },
+		// right	/ 12 13 14 15
+		{ XMFLOAT3(+0.5f, -0.5f, -0.5f), XMFLOAT2(0.0f, 1.0f) },
+		{ XMFLOAT3(+0.5f, +0.5f, -0.5f), XMFLOAT2(0.0f, 0.0f) },
+		{ XMFLOAT3(+0.5f, +0.5f, +0.5f), XMFLOAT2(1.0f, 0.0f) },
+		{ XMFLOAT3(+0.5f, -0.5f, +0.5f), XMFLOAT2(1.0f, 1.0f) },
+		// top		/ 16 17 18 19
+		{ XMFLOAT3(-0.5f, +0.5f, -0.5f), XMFLOAT2(0.0f, 1.0f) },
+		{ XMFLOAT3(-0.5f, +0.5f, +0.5f), XMFLOAT2(0.0f, 0.0f) },
+		{ XMFLOAT3(+0.5f, +0.5f, +0.5f), XMFLOAT2(1.0f, 0.0f) },
+		{ XMFLOAT3(+0.5f, +0.5f, -0.5f), XMFLOAT2(1.0f, 1.0f) },
+		// bottom	/ 20 21 22 23
+		{ XMFLOAT3(-0.5f, -0.5f, -0.5f), XMFLOAT2(1.0f, 1.0f) },
+		{ XMFLOAT3(-0.5f, -0.5f, +0.5f), XMFLOAT2(1.0f, 0.0f) },
+		{ XMFLOAT3(+0.5f, -0.5f, +0.5f), XMFLOAT2(0.0f, 0.0f) },
+		{ XMFLOAT3(+0.5f, -0.5f, -0.5f), XMFLOAT2(0.0f, 1.0f) }
 	};
 
 	mVertexCount = sizeof(vertices) / sizeof(VertexTex);
@@ -84,17 +106,17 @@ bool Dx11Geometry::InitBuffers(ID3D11Device * device)
 		4, 6, 5,
 		4, 7, 6,
 		// left face
-		4, 5, 1,
-		4, 1, 0,
+		8, 10, 9,
+		8, 11, 10,
 		// right face
-		3, 2, 6,
-		3, 6, 7,
+		12, 13, 14,
+		12, 14, 15,
 		// top face
-		1, 5, 6,
-		1, 6, 2,
+		16, 17, 18,
+		16, 18, 19,
 		// bottom face
-		4, 0, 3,
-		4, 3, 7
+		20, 22, 21,
+		20, 23, 22
 	};
 
 	mIndexCount = sizeof(indices) / sizeof(UINT);

@@ -26,11 +26,11 @@ bool Dx11App::Init()
 		return false;
 
 	mGeometry = new Dx11Geometry();
-	if (!mGeometry->Init(md3dDevice))
+	if (!mGeometry->Init(md3dDevice, L"Textures/seafloor.dds"))
 		return false;
 
 	mShader = new Dx11Shader();
-	if (!mShader->Init(md3dDevice, mhMainWnd, L"FX/color.fx"))
+	if (!mShader->Init(md3dDevice, mhMainWnd, L"FX/Texture.fx"))
 		return false;
 
 	return true;
@@ -86,7 +86,8 @@ void Dx11App::DrawScene()
 	XMMATRIX view = XMLoadFloat4x4(&mView);
 	XMMATRIX proj = XMLoadFloat4x4(&mProj);
 
-	mShader->Render(md3dImmediateContext, mGeometry->GetIndexCount(), world, view, proj);
+	mShader->Render(md3dImmediateContext, mGeometry->GetIndexCount(), world, view, proj,
+		mGeometry->GetTexture());
 
 	HR(mSwapChain->Present(0, 0));
 }

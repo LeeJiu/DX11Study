@@ -201,7 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FX\color.fx" />
-    <FxCompile Include="Texture.fx" />
+    <FxCompile Include="FX\Texture.fx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

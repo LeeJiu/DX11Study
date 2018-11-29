@@ -22,6 +22,9 @@
     <Filter Include="Core">
       <UniqueIdentifier>{700d703b-9377-41a1-946a-5470b5f6637e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{3137edaa-7c49-44e2-8366-cd8e8794cf3a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dx11Util.h">
@@ -39,13 +42,13 @@
     <ClInclude Include="Dx11Core.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Dx11Texture.h">
+      <Filter>Render</Filter>
+    </ClInclude>
     <ClInclude Include="Dx11Shader.h">
-      <Filter>Common</Filter>
+      <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="Dx11Geometry.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="Dx11Texture.h">
       <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
@@ -69,10 +72,10 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Dx11Shader.cpp">
-      <Filter>Common</Filter>
+      <Filter>Render</Filter>
     </ClCompile>
     <ClCompile Include="Dx11Texture.cpp">
-      <Filter>Common</Filter>
+      <Filter>Render</Filter>
     </ClCompile>
     <ClCompile Include="Dx11Geometry.cpp">
       <Filter>Common</Filter>
@@ -82,7 +85,7 @@
     <FxCompile Include="FX\color.fx">
       <Filter>FX</Filter>
     </FxCompile>
-    <FxCompile Include="Texture.fx">
+    <FxCompile Include="FX\Texture.fx">
       <Filter>FX</Filter>
     </FxCompile>
   </ItemGroup>
