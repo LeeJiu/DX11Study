@@ -10,7 +10,7 @@ public:
 
 	bool Init(ID3D11Device* device, HWND hwnd, WCHAR* filename);
 	void Release();
-	bool Render(ID3D11DeviceContext* immediateContext, int indexCount,
+	bool Render(ID3D11DeviceContext* context, int indexCount,
 		const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projMatrix);
 
 private:
@@ -18,9 +18,9 @@ private:
 	void ReleaseShader();
 	void OutputShaderErrorMessage(ID3D10Blob* errorMessage, HWND hwnd, WCHAR* filename);
 
-	bool SetShaderParams(ID3D11DeviceContext* immediateContext,
+	bool SetShaderParams(ID3D11DeviceContext* context,
 		const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projMatrix);
-	void RenderShader(ID3D11DeviceContext* immediateContext, int indexCount);
+	void RenderShader(ID3D11DeviceContext* context, int indexCount);
 
 private:
 	ID3D11VertexShader* mVertexShader;

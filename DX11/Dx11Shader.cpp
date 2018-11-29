@@ -26,14 +26,14 @@ void Dx11Shader::Release()
 	ReleaseShader();
 }
 
-bool Dx11Shader::Render(ID3D11DeviceContext * immediateContext, int indexCount, 
+bool Dx11Shader::Render(ID3D11DeviceContext * context, int indexCount,
 	const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projMatrix)
 {
 	// 렌더링에 사용할 셰이더 인자
-	if (!SetShaderParams(immediateContext, worldMatrix, viewMatrix, projMatrix)) return false;
+	if (!SetShaderParams(context, worldMatrix, viewMatrix, projMatrix)) return false;
 
 	// 셰이더를 이용하여 준비된 버퍼를 그린다.
-	RenderShader(immediateContext, indexCount);
+	RenderShader(context, indexCount);
 
 	return true;
 }
@@ -191,7 +191,7 @@ void Dx11Shader::OutputShaderErrorMessage(ID3D10Blob * errorMessage, HWND hwnd, 
 	MessageBox(hwnd, L"Error compiling shader. Check shader-error.txt for message.", filename, MB_OK);
 }
 
-bool Dx11Shader::SetShaderParams(ID3D11DeviceContext * immediateContext, 
+bool Dx11Shader::SetShaderParams(ID3D11DeviceContext * context,
 	const XMMATRIX& worldMatrix, const XMMATRIX& viewMatrix, const XMMATRIX& projMatrix)
 {
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -203,31 +203,31 @@ bool Dx11Shader::SetShaderParams(ID3D11DeviceContext * immediateContext,
 	XMMATRIX wvp = XMMatrixTranspose(worldMatrix * viewMatrix * projMatrix);
 	
 	// 상수 버퍼 사용 시작(잠금)
-	immediateContext->Map(mMatrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+	context->Map(mMatrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	// 상수 버퍼에 데이터 카피
 	memcpy(mappedResource.pData, &wvp, sizeof(XMMATRIX));
 	// 상수 버퍼 사용 끝(잠금 해제)
-	immediateContext->Unmap(mMatrixBuffer, 0);
+	context->Unmap(mMatrixBuffer, 0);
 
 	// vs 에서의 상수 버퍼 위치
 	bufferNumber = 0;
 
 	// 상수 버퍼 갱신
-	immediateContext->VSSetConstantBuffers(bufferNumber, 1, &mMatrixBuffer);
-	immediateContext->PSSetConstantBuffers(bufferNumber, 1, &mMatrixBuffer);
+	context->VSSetConstantBuffers(bufferNumber, 1, &mMatrixBuffer);
+	context->PSSetConstantBuffers(bufferNumber, 1, &mMatrixBuffer);
 
 	return true;
 }
 
-void Dx11Shader::RenderShader(ID3D11DeviceContext * immediateContext, int indexCount)
+void Dx11Shader::RenderShader(ID3D11DeviceContext * context, int indexCount)
 {
 	// 정점 입력 레이아웃 설정
-	immediateContext->IASetInputLayout(mLayout);
+	context->IASetInputLayout(mLayout);
 
 	// vs, ps 설정
-	immediateContext->VSSetShader(mVertexShader, nullptr, 0);
-	immediateContext->PSSetShader(mPixelShader, nullptr, 0);
+	context->VSSetShader(mVertexShader, nullptr, 0);
+	context->PSSetShader(mPixelShader, nullptr, 0);
 
 	// draw
-	immediateContext->DrawIndexed(indexCount, 0, 0);
+	context->DrawIndexed(indexCount, 0, 0);
 }

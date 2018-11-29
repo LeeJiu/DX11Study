@@ -10,6 +10,7 @@
 #include <DirectXPackedVector.h>
 #include <d3dcompiler.h>
 #include <d3dx11async.h>
+#include <d3dx11tex.h>
 
 #include <string>
 #include <cassert>
@@ -75,7 +76,7 @@ namespace Colors
 	XMGLOBALCONST XMVECTORF32 LightSteelBlue = { 0.69f, 0.77f, 0.87f, 1.0f };
 }
 
-struct Vertex
+struct VertexColor
 {
 	XMFLOAT3 Position;
 	XMFLOAT4 Color;

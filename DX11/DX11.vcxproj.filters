@@ -43,7 +43,10 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="Dx11Geometry.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Dx11Texture.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,12 +71,18 @@
     <ClCompile Include="Dx11Shader.cpp">
       <Filter>Common</Filter>
     </ClCompile>
+    <ClCompile Include="Dx11Texture.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
     <ClCompile Include="Dx11Geometry.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FX\color.fx">
+      <Filter>FX</Filter>
+    </FxCompile>
+    <FxCompile Include="Texture.fx">
       <Filter>FX</Filter>
     </FxCompile>
   </ItemGroup>
