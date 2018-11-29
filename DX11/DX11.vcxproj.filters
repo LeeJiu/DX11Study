@@ -16,11 +16,14 @@
     <Filter Include="Common">
       <UniqueIdentifier>{5f7fcbec-2e31-4c3d-a5e2-500873023307}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FX">
+      <UniqueIdentifier>{827b85d6-d215-4252-aaa7-5472765caafb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{700d703b-9377-41a1-946a-5470b5f6637e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Dx11Core.h">
-      <Filter>Common</Filter>
-    </ClInclude>
     <ClInclude Include="Dx11Util.h">
       <Filter>Common</Filter>
     </ClInclude>
@@ -30,11 +33,20 @@
     <ClInclude Include="Dx11App.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="MathHelper.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Dx11Core.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Dx11Shader.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Dx11Geometry.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Dx11Core.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
     <ClCompile Include="Dx11Util.cpp">
       <Filter>Common</Filter>
     </ClCompile>
@@ -47,5 +59,22 @@
     <ClCompile Include="Dx11App.cpp">
       <Filter>Common</Filter>
     </ClCompile>
+    <ClCompile Include="MathHelper.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Dx11Core.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Dx11Shader.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Dx11Geometry.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="FX\color.fx">
+      <Filter>FX</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

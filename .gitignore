@@ -279,3 +279,9 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+#IntelliSense database
+*.VC.db
+
+#Shader error file
+shader-error.txt

@@ -5,10 +5,24 @@
 #include <crtdbg.h>
 #endif
 
-#include <D3DX11.h>
-#include <DirectXMath.h>
+#include <d3d11.h>
+#include <dxgi.h>
+#include <DirectXPackedVector.h>
+#include <d3dcompiler.h>
+#include <d3dx11async.h>
+
 #include <string>
 #include <cassert>
+#include <fstream>
+#include <sstream>
+#include <windowsx.h>
+
+#include <vector>
+
+#include "MathHelper.h"
+
+using namespace std;
+using namespace DirectX::PackedVector;
 
 
 #define SafeRelease(p) { if(p) { (p)->Release(); (p) = nullptr; } }
@@ -16,11 +30,7 @@
 #define SafeDeleteArr(p) { if(p) { delete[] (p); (p) = nullptr; } }
 
 
-
 // dx error check
-// dxsdk 가 windows 10 에 포함되면서
-// DXTrace()가 사라짐
-// -> FormatMessage() & MessageBox() 로 대체해서 에러 메세지 띄움
 // 출처: https://wergia.tistory.com/6 [베르의 프로그래밍 노트]
 #if defined(DEBUG) || defined(_DEBUG)
 #ifndef HR
@@ -52,15 +62,21 @@
 
 namespace Colors
 {
-	XMGLOBALCONST DirectX::XMVECTORF32 White = { 1.0f, 1.0f, 1.0f, 1.0f };
-	XMGLOBALCONST DirectX::XMVECTORF32 Black = { 0.0f, 0.0f, 0.0f, 1.0f };
-	XMGLOBALCONST DirectX::XMVECTORF32 Red = { 1.0f, 0.0f, 0.0f, 1.0f };
-	XMGLOBALCONST DirectX::XMVECTORF32 Green = { 0.0f, 1.0f, 0.0f, 1.0f };
-	XMGLOBALCONST DirectX::XMVECTORF32 Blue = { 0.0f, 0.0f, 1.0f, 1.0f };
-	XMGLOBALCONST DirectX::XMVECTORF32 Yellow = { 1.0f, 1.0f, 0.0f, 1.0f };
-	XMGLOBALCONST DirectX::XMVECTORF32 Cyan = { 0.0f, 1.0f, 1.0f, 1.0f };
-	XMGLOBALCONST DirectX::XMVECTORF32 Magenta = { 1.0f, 0.0f, 1.0f, 1.0f };
+	XMGLOBALCONST XMVECTORF32 White = { 1.0f, 1.0f, 1.0f, 1.0f };
+	XMGLOBALCONST XMVECTORF32 Black = { 0.0f, 0.0f, 0.0f, 1.0f };
+	XMGLOBALCONST XMVECTORF32 Red = { 1.0f, 0.0f, 0.0f, 1.0f };
+	XMGLOBALCONST XMVECTORF32 Green = { 0.0f, 1.0f, 0.0f, 1.0f };
+	XMGLOBALCONST XMVECTORF32 Blue = { 0.0f, 0.0f, 1.0f, 1.0f };
+	XMGLOBALCONST XMVECTORF32 Yellow = { 1.0f, 1.0f, 0.0f, 1.0f };
+	XMGLOBALCONST XMVECTORF32 Cyan = { 0.0f, 1.0f, 1.0f, 1.0f };
+	XMGLOBALCONST XMVECTORF32 Magenta = { 1.0f, 0.0f, 1.0f, 1.0f };
 
-	XMGLOBALCONST DirectX::XMVECTORF32 Silver = { 0.75f, 0.75f, 0.75f, 1.0f };
-	XMGLOBALCONST DirectX::XMVECTORF32 LightSteelBlue = { 0.69f, 0.77f, 0.87f, 1.0f };
+	XMGLOBALCONST XMVECTORF32 Silver = { 0.75f, 0.75f, 0.75f, 1.0f };
+	XMGLOBALCONST XMVECTORF32 LightSteelBlue = { 0.69f, 0.77f, 0.87f, 1.0f };
 }
+
+struct Vertex
+{
+	XMFLOAT3 Position;
+	XMFLOAT4 Color;
+};

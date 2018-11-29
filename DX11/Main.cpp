@@ -13,5 +13,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance,
 	if (!app.Init())
 		return 0;
 
-	return app.Run();
+	app.Run();
+
+	// 종료 전에 해제
+	app.Release();
+
+	return 0;
 }

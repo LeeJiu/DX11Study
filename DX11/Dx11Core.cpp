@@ -37,16 +37,6 @@ Dx11Core::Dx11Core(HINSTANCE hInstance)
 
 Dx11Core::~Dx11Core()
 {
-	SafeRelease(mRenderTargetView);
-	SafeRelease(mDepthStencilView);
-	SafeRelease(mSwapChain);
-	SafeRelease(mDepthStencilBuffer);
-
-	if (md3dImmediateContext)
-		md3dImmediateContext->ClearState();
-
-	SafeRelease(md3dImmediateContext);
-	SafeRelease(md3dDevice);
 }
 
 HINSTANCE Dx11Core::CoreInst() const
@@ -106,6 +96,20 @@ bool Dx11Core::Init()
 		return false;
 
 	return true;
+}
+
+void Dx11Core::Release()
+{
+	SafeRelease(mRenderTargetView);
+	SafeRelease(mDepthStencilView);
+	SafeRelease(mSwapChain);
+	SafeRelease(mDepthStencilBuffer);
+
+	if (md3dImmediateContext)
+		md3dImmediateContext->ClearState();
+
+	SafeRelease(md3dImmediateContext);
+	SafeRelease(md3dDevice);
 }
 
 void Dx11Core::OnResize()

@@ -16,6 +16,7 @@ public:
 
 	// Framework Mathods
 	virtual bool Init();
+	virtual void Release();
 	virtual void OnResize();
 	virtual void UpdateScene(float dt) = 0;
 	virtual void DrawScene() = 0;
